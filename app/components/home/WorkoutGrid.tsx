@@ -1,0 +1,118 @@
+// // 
+
+// import WorkoutCard from "./WorkoutCard";
+// import type { Workout } from "../../types/workout";
+
+// interface WorkoutGridProps {
+//   workouts: Workout[];
+// }
+
+// const WorkoutGrid = ({ workouts }: WorkoutGridProps) => {
+//   return (
+//     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+//       {workouts.map((workout) => (
+//         <WorkoutCard
+//           key={workout.id}
+//           workout={workout}
+//         />
+//       ))}
+//     </div>
+//   );
+// };
+
+// export default WorkoutGrid;
+
+
+
+
+"use client";
+
+import { useMemo, useState } from "react";
+import WorkoutCard from "./WorkoutCard";
+import type { Workout } from "../../types/workout";
+
+interface WorkoutGridProps {
+  workouts: Workout[];
+}
+
+type SortOption = "duration" | "calories" | "rating";
+
+const WorkoutGrid = ({ workouts }: WorkoutGridProps) => {
+  const [sortBy, setSortBy] = useState<SortOption>("duration");
+
+  const sortedWorkouts = useMemo(() => {
+    const copiedWorkouts = [...workouts];
+
+    if (sortBy === "duration") {
+      return copiedWorkouts.sort(
+        (a, b) => a.duration - b.duration
+      );
+    }
+
+    if (sortBy === "calories") {
+      return copiedWorkouts.sort(
+        (a, b) => a.caloriesBurned - b.caloriesBurned
+      );
+    }
+
+    if (sortBy === "rating") {
+      return copiedWorkouts.sort(
+        (a, b) => b.rating - a.rating
+      );
+    }
+
+    return copiedWorkouts;
+  }, [workouts, sortBy]);
+
+  return (
+    <div>
+      {/* Library Header */}
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-lime-400">
+            THE LIBRARY
+          </p>
+
+          <h2 className="mt-2 text-3xl font-black uppercase text-white sm:text-4xl">
+            Twelve lifts covering every major muscle group.
+          </h2>
+        </div>
+
+        {/* Sort */}
+        <div className="shrink-0">
+          <label
+            htmlFor="sort-workouts"
+            className="mb-2 block text-xs font-semibold uppercase tracking-wider text-gray-500"
+          >
+            Sort by
+          </label>
+
+          <select
+            id="sort-workouts"
+            value={sortBy}
+            onChange={(event) =>
+              setSortBy(event.target.value as SortOption)
+            }
+            className="rounded-xl border border-gray-700 bg-gray-950 px-4 py-3 text-sm font-medium text-white outline-none transition focus:border-lime-400"
+          >
+            <option value="duration">Duration</option>
+            <option value="calories">Calories</option>
+            <option value="rating">Rating</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Workout Grid */}
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {sortedWorkouts.map((workout) => (
+          <WorkoutCard
+            key={workout.id}
+            workout={workout}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default WorkoutGrid;

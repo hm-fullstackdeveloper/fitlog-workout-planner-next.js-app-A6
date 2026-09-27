@@ -1,0 +1,24 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+body {
+  background-color: black;
+  color: white;
+}
+
+
+@utility brand-text-colure {
+  color: theme(colors.lime.400);
+}
+
+
+@utility brand-bg-colure {
+  background-color: theme(colors.lime.400);
+}
+
+
+@utility brand-hover-text {
+  &:hover {
+    color: theme(colors.lime.400);
+  }
+}
