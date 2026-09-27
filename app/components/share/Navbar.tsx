@@ -80,7 +80,7 @@ const savedCount = savedIds.length;
           >
             <span>Plan</span>
 
-            <span className="brand-hover-text flex h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 text-xs font-bold text-gray-900">
+            <span className=" flex h-5 min-w-5 items-center justify-center rounded-full brand-bg-colure px-1 text-xs font-bold text-gray-900">
               {planCount}
             </span>
           </Link>
