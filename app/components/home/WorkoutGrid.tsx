@@ -51,28 +51,6 @@ const WorkoutGrid = ({ workouts }: WorkoutGridProps) => {
           </h2>
         </div>
 
-        {/* Sort */}
-        <div className="shrink-0">
-          <label
-            htmlFor="sort-workouts"
-            className="mb-2 block text-xs font-semibold uppercase tracking-wider text-gray-500"
-          >
-            Sort by
-          </label>
-
-          <select
-            id="sort-workouts"
-            value={sortBy}
-            onChange={(event) =>
-              setSortBy(event.target.value as SortOption)
-            }
-            className="rounded-xl border border-gray-700 bg-gray-950 px-4 py-3 text-sm font-medium text-white outline-none transition focus:border-lime-400"
-          >
-            <option value="duration">Duration</option>
-            <option value="calories">Calories</option>
-            <option value="rating">Rating</option>
-          </select>
-        </div>
       </div>
 
       {/* Workout Grid */}

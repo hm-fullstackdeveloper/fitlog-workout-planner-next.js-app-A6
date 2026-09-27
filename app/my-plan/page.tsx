@@ -13,6 +13,8 @@ const API_URL = "https://api.abcz.workers.dev/api/fitlog";
 
 type Tab = "plan" | "saved";
 
+type SortOption = "duration" | "calories" | "rating";
+
 const MyPlanPage = () => {
   const { planIds, savedIds, removeFromPlan, removeFromSaved } = useFitLog();
 
@@ -20,6 +22,7 @@ const MyPlanPage = () => {
   const [activeTab, setActiveTab] = useState<Tab>("plan");
   const [loading, setLoading] = useState(true);
   const [doneIds, setDoneIds] = useState<number[]>([]);
+  const [sortBy, setSortBy] = useState<SortOption>("duration");
 
   useEffect(() => {
     const fetchWorkouts = async () => {
@@ -53,6 +56,22 @@ const MyPlanPage = () => {
 
   const currentWorkouts =
     activeTab === "plan" ? plannedWorkouts : savedWorkouts;
+
+  const sortedWorkouts = [...currentWorkouts].sort((a, b) => {
+    if (sortBy === "duration") {
+      return a.duration - b.duration;
+    }
+
+    if (sortBy === "calories") {
+      return a.caloriesBurned - b.caloriesBurned;
+    }
+
+    if (sortBy === "rating") {
+      return b.rating - a.rating;
+    }
+
+    return 0;
+  });
 
   const totalMinutes = plannedWorkouts.reduce(
     (total, workout) => total + workout.duration,
@@ -134,9 +153,10 @@ const MyPlanPage = () => {
           </div>
         </div>
 
-                
-                    {/* Tabs */}
-          <div className="mb-8 flex w-fit rounded-xl border border-gray-800 bg-[#15171c] p-1">
+        {/* Tabs + Sort */}
+        <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          {/* Tabs */}
+          <div className="flex w-fit rounded-xl border border-gray-800 bg-[#15171c] p-1">
             <button
               type="button"
               onClick={() => setActiveTab("plan")}
@@ -162,7 +182,29 @@ const MyPlanPage = () => {
             </button>
           </div>
 
+          {/* Sort */}
+          <div className="flex items-center gap-3 sm:justify-end">
+            <label
+              htmlFor="sort-workouts"
+              className="text-xs font-semibold uppercase tracking-wider text-gray-500"
+            >
+              Sort by
+            </label>
 
+            <select
+              id="sort-workouts"
+              value={sortBy}
+              onChange={(event) =>
+                setSortBy(event.target.value as SortOption)
+              }
+              className="rounded-xl border border-gray-700 bg-gray-950 px-4 py-3 text-sm font-medium text-white outline-none transition focus:border-lime-400"
+            >
+              <option value="duration">Duration</option>
+              <option value="calories">Calories</option>
+              <option value="rating">Rating</option>
+            </select>
+          </div>
+        </div>
 
         {/* Loading */}
         {loading ? (
@@ -175,7 +217,7 @@ const MyPlanPage = () => {
               </p>
             </div>
           </div>
-        ) : currentWorkouts.length === 0 ? (
+        ) : sortedWorkouts.length === 0 ? (
           /* Empty State */
           <div className="flex min-h-80 items-center justify-center rounded-2xl border border-dashed border-gray-800 bg-gray-950 px-6">
             <div className="text-center">
@@ -184,11 +226,13 @@ const MyPlanPage = () => {
               </p>
 
               <h2 className="mt-3 text-2xl font-bold">
-                Your {activeTab === "plan" ? "plan" : "saved workouts"} is empty
+                Your {activeTab === "plan" ? "plan" : "saved workouts"} is
+                empty
               </h2>
 
               <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-gray-500">
-                Browse the workout library and add exercises to your collection.
+                Browse the workout library and add exercises to your
+                collection.
               </p>
 
               <Link
@@ -202,7 +246,7 @@ const MyPlanPage = () => {
         ) : (
           /* Workout List */
           <div className="grid grid-cols-1 gap-5">
-            {currentWorkouts.map((workout) => {
+            {sortedWorkouts.map((workout) => {
               const isDone = doneIds.includes(workout.id);
 
               return (
@@ -215,13 +259,14 @@ const MyPlanPage = () => {
                   {/* Image */}
                   <div className="relative h-44 w-full shrink-0 overflow-hidden rounded-xl sm:h-32 sm:w-48">
                     <Image
-                    src={workout.image}
-                    alt={workout.name}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 100vw, 192px"
-                  />
-                </div>
+                      src={workout.image}
+                      alt={workout.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, 192px"
+                    />
+                  </div>
+
                   {/* Content */}
                   <div className="min-w-0 flex-1">
                     <div className="mb-2 flex flex-wrap gap-2">
