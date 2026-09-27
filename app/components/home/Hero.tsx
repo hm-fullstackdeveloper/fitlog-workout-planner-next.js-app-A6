@@ -79,10 +79,10 @@ const Hero = () => {
           </p>
 
           {/* Heading */}
-          <h1 className="text-4xl font-black uppercase leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
-            TRAIN WITH INTENT.
+          <h1 className="text-4xl font-black uppercase leading-[1.05] tracking-tight text-white sm:text-4xl lg:text-5xl">
+            TRAIN WITH INTENT.LOG
             <br />
-            LOG EVERY SET.
+             EVERY SET.
           </h1>
 
           {/* Subtitle */}

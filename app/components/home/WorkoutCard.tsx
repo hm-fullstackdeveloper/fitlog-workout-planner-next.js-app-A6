@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+
 import {
   Clock3,
   Flame,
@@ -18,10 +19,7 @@ interface WorkoutCardProps {
 }
 
 const WorkoutCard = ({ workout }: WorkoutCardProps) => {
-  const {
-    toggleSave,
-    isSaved,
-  } = useFitLog();
+  const { toggleSave, isSaved } = useFitLog();
 
   const saved = isSaved(workout.id);
 
@@ -30,102 +28,122 @@ const WorkoutCard = ({ workout }: WorkoutCardProps) => {
   };
 
   return (
-    <article className="group overflow-hidden rounded-xl border border-gray-800 bg-[#111214] transition duration-300 hover:-translate-y-1 hover:border-gray-700 hover:shadow-xl">
+    <article className="group overflow-hidden rounded-2xl border border-[#292c32] bg-[#111214] transition-all duration-300 hover:-translate-y-1 hover:border-[#3a3d43] hover:shadow-xl">
 
-      {/* Image */}
-      <Link
-        href={`/workout/${workout.id}`}
-        className="block"
-      >
-        <div className="relative aspect-[16/10] overflow-hidden bg-gray-900">
+      {/* ================= IMAGE ================= */}
+      <div className="relative aspect-[16/9] overflow-hidden bg-[#1a1b1f]">
 
+        <Link
+          href={`/workout/${workout.id}`}
+          className="block h-full"
+        >
           <Image
             src={workout.image}
             alt={workout.name}
             fill
-            className="object-cover transition duration-500 group-hover:scale-105"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
+        </Link>
 
-          {/* Difficulty */}
-          <span className="absolute left-3 top-3 rounded-full bg-[#ccff00] px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-black">
-            {workout.difficulty}
-          </span>
+        {/* Save Button */}
+        <button
+          type="button"
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
 
-          {/* Save */}
-          <button
-            type="button"
-            onClick={(event) => {
-              event.preventDefault();
-              event.stopPropagation();
+            handleSave();
+          }}
+          className={`absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-black/50 backdrop-blur-sm transition ${
+            saved
+              ? "text-[#ccff00]"
+              : "text-white/80 hover:text-[#ccff00]"
+          }`}
+          aria-label={
+            saved
+              ? "Remove from saved"
+              : "Save workout"
+          }
+        >
+          <Heart
+            size={18}
+            strokeWidth={2}
+            fill={saved ? "currentColor" : "none"}
+          />
+        </button>
+      </div>
 
-              handleSave();
-            }}
-            className={`absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/70 transition ${
-              saved
-                ? "text-[#ccff00]"
-                : "text-white hover:text-[#ccff00]"
-            }`}
-            aria-label={
-              saved
-                ? "Remove from saved"
-                : "Save workout"
-            }
-          >
-            <Heart
-              size={17}
-              fill={saved ? "currentColor" : "none"}
-            />
-          </button>
-        </div>
-      </Link>
+      {/* ================= CONTENT ================= */}
+      <div className="px-7 py-7">
 
-      {/* Content */}
-      <div className="p-4">
+        {/* Muscle Groups */}
+        <div className="mb-5 flex flex-wrap gap-2">
 
-        {/* Muscle groups */}
-        <div className="mb-3 flex flex-wrap gap-2">
           {workout.muscleGroups.map((muscle) => (
             <span
               key={muscle}
-              className="rounded-full bg-[#25272b] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-gray-300"
+              className="rounded-full bg-[#ccff00] px-3.5 py-1.5 text-[12px] font-bold uppercase tracking-wide text-black"
             >
               {muscle}
             </span>
           ))}
+
         </div>
 
-        {/* Name */}
+        {/* Workout Name */}
         <Link href={`/workout/${workout.id}`}>
-          <h3 className="text-base font-bold uppercase tracking-wide text-white transition hover:text-[#ccff00]">
+          <h3 className="text-[22px] font-extrabold uppercase leading-tight tracking-wide text-white transition-colors duration-200 hover:text-[#ccff00]">
             {workout.name}
           </h3>
         </Link>
 
         {/* Equipment */}
-        <p className="mt-1 text-xs text-gray-500">
+        <p className="mt-2 text-[15px] text-[#9ca0aa]">
           {workout.equipment}
         </p>
 
+        {/* Divider */}
+        <div className="my-5 border-t border-[#292c32]" />
+
         {/* Stats */}
-        <div className="mt-4 flex flex-wrap items-center gap-4 border-t border-gray-800 pt-4 text-xs text-gray-400">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-[14px] text-[#9ca0aa]">
 
-          <span className="flex items-center gap-1.5">
-            <Clock3 size={14} />
-            {workout.duration} min
+          {/* Duration */}
+          <span className="flex items-center gap-2">
+            <Clock3
+              size={18}
+              strokeWidth={1.8}
+            />
+
+            <span>
+              {workout.duration} min
+            </span>
           </span>
 
-          <span className="flex items-center gap-1.5">
-            <Flame size={14} />
-            {workout.caloriesBurned} kcal
-          </span>
-
-          <span className="flex items-center gap-1.5">
-            <Star
-              size={14}
+          {/* Calories */}
+          <span className="flex items-center gap-2">
+            <Flame
+              size={18}
+              strokeWidth={1.8}
               fill="currentColor"
             />
-            {workout.rating}
+
+            <span>
+              {workout.caloriesBurned} kcal
+            </span>
+          </span>
+
+          {/* Rating */}
+          <span className="flex items-center gap-2">
+            <Star
+              size={18}
+              strokeWidth={1.8}
+            />
+
+            <span>
+              {workout.rating}
+            </span>
           </span>
 
         </div>
