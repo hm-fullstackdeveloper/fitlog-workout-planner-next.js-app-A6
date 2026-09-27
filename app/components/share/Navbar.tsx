@@ -14,11 +14,11 @@ const Navbar = () => {
   const pathname = usePathname();
 
   // Get plan and saved data from Context
+
   const { planIds, savedIds } = useFitLog();
 
-  // Dynamic counters
-  const planCount = planIds.length;
-  const savedCount = savedIds.length;
+const planCount = planIds.length;
+const savedCount = savedIds.length;
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-800 bg-black">

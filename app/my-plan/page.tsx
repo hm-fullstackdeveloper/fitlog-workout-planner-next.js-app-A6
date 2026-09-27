@@ -134,59 +134,33 @@ const MyPlanPage = () => {
           </div>
         </div>
 
-        {/* Tabs
-        <div className="mb-8 flex gap-3 border-b border-gray-800 pb-4">
-          <button
-            type="button"
-            onClick={() => setActiveTab("plan")}
-            className={`rounded-full px-5 py-2.5 text-sm font-bold uppercase transition ${
-              activeTab === "plan"
-                ? "bg-lime-400 text-black"
-                : "border border-gray-700 text-gray-400 hover:border-lime-400 hover:text-white"
-            }`}
-          >
-            Today's Plan ({planIds.length})
-          </button>
+                
+                    {/* Tabs */}
+          <div className="mb-8 flex w-fit rounded-xl border border-gray-800 bg-[#15171c] p-1">
+            <button
+              type="button"
+              onClick={() => setActiveTab("plan")}
+              className={`rounded-lg px-6 py-2.5 text-sm font-bold transition ${
+                activeTab === "plan"
+                  ? "bg-[#252a33] text-white shadow-sm"
+                  : "text-gray-500 hover:text-gray-300"
+              }`}
+            >
+              Today's Plan
+            </button>
 
-          <button
-            type="button"
-            onClick={() => setActiveTab("saved")}
-            className={`rounded-full px-5 py-2.5 text-sm font-bold uppercase transition ${
-              activeTab === "saved"
-                ? "bg-lime-400 text-black"
-                : "border border-gray-700 text-gray-400 hover:border-lime-400 hover:text-white"
-            }`}
-          >
-            Saved ({savedIds.length})
-          </button>
-        </div> */}
-
-          {/* Tabs */}
-<div className="mb-8 flex w-fit rounded-xl border border-gray-800 bg-[#15171c] p-1">
-  <button
-    type="button"
-    onClick={() => setActiveTab("plan")}
-    className={`rounded-lg px-6 py-2.5 text-sm font-bold transition ${
-      activeTab === "plan"
-        ? "bg-[#252a33] text-white shadow-sm"
-        : "text-gray-500 hover:text-gray-300"
-    }`}
-  >
-    Today's Plan
-  </button>
-
-  <button
-    type="button"
-    onClick={() => setActiveTab("saved")}
-    className={`rounded-lg px-6 py-2.5 text-sm font-bold transition ${
-      activeTab === "saved"
-        ? "bg-[#252a33] text-white shadow-sm"
-        : "text-gray-500 hover:text-gray-300"
-    }`}
-  >
-    Saved
-  </button>
-</div>
+            <button
+              type="button"
+              onClick={() => setActiveTab("saved")}
+              className={`rounded-lg px-6 py-2.5 text-sm font-bold transition ${
+                activeTab === "saved"
+                  ? "bg-[#252a33] text-white shadow-sm"
+                  : "text-gray-500 hover:text-gray-300"
+              }`}
+            >
+              Saved
+            </button>
+          </div>
 
 
 
