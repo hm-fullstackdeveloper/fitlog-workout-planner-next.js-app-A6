@@ -30,7 +30,7 @@ const WorkoutCard = ({ workout }: WorkoutCardProps) => {
   return (
     <article className="group overflow-hidden rounded-2xl border border-[#292c32] bg-[#111214] transition-all duration-300 hover:-translate-y-1 hover:border-[#3a3d43] hover:shadow-xl">
 
-      {/* ================= IMAGE ================= */}
+      {/*IMAGE  */}
       <div className="relative aspect-[16/9] overflow-hidden bg-[#1a1b1f]">
 
         <Link
@@ -57,8 +57,8 @@ const WorkoutCard = ({ workout }: WorkoutCardProps) => {
           }}
           className={`absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-black/50 backdrop-blur-sm transition ${
             saved
-              ? "text-[#ccff00]"
-              : "text-white/80 hover:text-[#ccff00]"
+              ? "brand-text-colure"
+              : "text-white/80 brand-hover-text"
           }`}
           aria-label={
             saved
@@ -74,7 +74,7 @@ const WorkoutCard = ({ workout }: WorkoutCardProps) => {
         </button>
       </div>
 
-      {/* ================= CONTENT ================= */}
+      {/*CONTENT*/}
       <div className="px-7 py-7">
 
         {/* Muscle Groups */}
@@ -83,7 +83,7 @@ const WorkoutCard = ({ workout }: WorkoutCardProps) => {
           {workout.muscleGroups.map((muscle) => (
             <span
               key={muscle}
-              className="rounded-full bg-[#ccff00] px-3.5 py-1.5 text-[12px] font-bold uppercase tracking-wide text-black"
+              className="rounded-full brand-bg-colure px-3.5 py-1.5 text-[12px] font-bold uppercase tracking-wide text-black"
             >
               {muscle}
             </span>
@@ -93,7 +93,7 @@ const WorkoutCard = ({ workout }: WorkoutCardProps) => {
 
         {/* Workout Name */}
         <Link href={`/workout/${workout.id}`}>
-          <h3 className="text-[22px] font-extrabold uppercase leading-tight tracking-wide text-white transition-colors duration-200 hover:text-[#ccff00]">
+          <h3 className="text-[22px] font-extrabold uppercase leading-tight tracking-wide text-white transition-colors duration-200 brand-hover-text">
             {workout.name}
           </h3>
         </Link>
