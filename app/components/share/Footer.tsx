@@ -1,14 +1,14 @@
 const Footer = () => {
   return (
     <footer className="border-t border-[#181a1f] bg-[#090a0c]">
-      <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-5 py-10 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-6 px-5 py-10 sm:flex-row sm:items-center sm:justify-between">
         
         {/* Left: Logo */}
         <div className="flex items-center gap-6">
           {/* FitLog Icon */}
           <svg
-            width="40"
-            height="28"
+            width="32"
+            height="20"
             viewBox="0 0 40 28"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -64,13 +64,13 @@ const Footer = () => {
           </svg>
 
           {/* FITLOG */}
-          <span className="text-[28px] font-extrabold leading-none tracking-tight text-white">
+          <span className="text-[22px] font-extrabold leading-none tracking-tight text-white">
             FITLOG
           </span>
         </div>
 
         {/* Right: Copyright */}
-        <p className="text-center text-[20px] text-gray-600 sm:text-right">
+        <p className="text-center text-[15px] text-gray-600 sm:text-right">
           © 2026 FitLog — Workout Library. Train hard, log honest.
         </p>
       </div>
