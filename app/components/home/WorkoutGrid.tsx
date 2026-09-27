@@ -1,30 +1,3 @@
-// // 
-
-// import WorkoutCard from "./WorkoutCard";
-// import type { Workout } from "../../types/workout";
-
-// interface WorkoutGridProps {
-//   workouts: Workout[];
-// }
-
-// const WorkoutGrid = ({ workouts }: WorkoutGridProps) => {
-//   return (
-//     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-//       {workouts.map((workout) => (
-//         <WorkoutCard
-//           key={workout.id}
-//           workout={workout}
-//         />
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default WorkoutGrid;
-
-
-
-
 "use client";
 
 import { useMemo, useState } from "react";
@@ -69,11 +42,11 @@ const WorkoutGrid = ({ workouts }: WorkoutGridProps) => {
       {/* Library Header */}
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-lime-400">
+          <p className="text-3xl sm font-black uppercase text-white">
             THE LIBRARY
           </p>
 
-          <h2 className="mt-2 text-3xl font-black uppercase text-white sm:text-4xl">
+          <h2 className="mx-auto mt-6 max-w-xl text-sm leading-6 text-gray-500 sm:text-base lg:mx-0">
             Twelve lifts covering every major muscle group.
           </h2>
         </div>
